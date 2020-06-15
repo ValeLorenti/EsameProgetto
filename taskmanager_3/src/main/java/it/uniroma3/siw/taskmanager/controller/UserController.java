@@ -1,10 +1,7 @@
 package it.uniroma3.siw.taskmanager.controller;
 
 import java.util.List;
-
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import it.uniroma3.siw.taskmanager.controller.session.SessionData;
 import it.uniroma3.siw.taskmanager.controller.validation.CredentialsValidator;
 import it.uniroma3.siw.taskmanager.controller.validation.UserValidator;
@@ -113,49 +109,6 @@ public class UserController {
 		return "redirect:/admin/users";
 	}
 
-	//	@RequestMapping(value = { "/updateMyProfileForm" }, method = RequestMethod.GET)
-	//	public String updateMyProfileForm(@Valid@ModelAttribute("loggedUser") User user, Model model) {
-	//		User loggedUser = sessionData.getLoggedUser();
-	//		Credentials credentials = sessionData.getLoggedCredentials();
-	//		Long userId = user.getId();
-	//		User user1 = this.userRepository.findById(userId).get();
-	//		user1.setFirstName(user.getFirstName());
-	//		this.userRepository.save(user1);
-	//
-	//		model.addAttribute("loggedUser", loggedUser);
-	//		model.addAttribute("loggedUserCredentials", credentials);
-	//
-	//		return "redirect:/updateMyProfileForm";
-	//	}
-
-
-
-	
-//
-//
-//	@RequestMapping(value="/users/updateProfile",method=RequestMethod.POST)
-//	public String updateProfile (@Valid @ModelAttribute("userFormUpdate") User user,BindingResult userBindingResult,Model model,
-//			@Valid @ModelAttribute("credentialsFormUpdate") Credentials credentials,BindingResult credentialsBindingResult,
-//			@PathVariable("idUser") Long idUser) {
-//		this.userValidator.validate(user, userBindingResult);
-//		this.credentialsValidator.validate(credentials, credentialsBindingResult);
-//		if(!userBindingResult.hasErrors()) { //&& !credentialsBindingResult.hasErrors()) {
-//			System.out.println(user.toString());
-//			Long userId = user.getId();
-//			User user1 = this.userRepository.findById(userId).get();
-//			System.out.println(user.toString());
-//			user1.setFirstName(user.getFirstName());
-//			this.userRepository.save(user1);
-//			credentials.setUser(user);
-//			//            this.credentialsService.saveCredentials(credentials);
-//			//            this.userService.saveUser(user);
-//			model.addAttribute("loggedUser",user);
-//			model.addAttribute("credentials",credentials);
-//			return "userProfile";
-//		}
-//		return "updateMyProfileForm";
-//	}
-	
 	
 	@RequestMapping(value="/users/update",method=RequestMethod.GET)
 	public String update (Model model) {
@@ -179,9 +132,14 @@ public class UserController {
 		oldUser.setFirstName(newUser.getFirstName());
 		oldUser.setLastName(newUser.getFirstName());
 		oldCredentials.setUserName(newCredentials.getUserName());
+		
+		/*Con questa modalità di gestione di update della password 
+		 * è possibile sia inserire la vecchia password che l'eventuale
+		 * nuova password
+		 */
 		oldCredentials.setPassword(newCredentials.getPassword());
 		this.credentialsService.saveCredentials(oldCredentials);
-		return "redirect:/users/me";
+		return "updatedProfileSuccessful";
 	}
 
 }
