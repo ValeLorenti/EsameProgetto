@@ -8,7 +8,6 @@
  
 <body>
     <h1 th:text="${project.name}"></h1>
-    <a th:href="@{'/project/shareWithForm' + '/' + ${project.id}}">Share this project</a>
     <h4 th:text="${project.description}" style="color: green"></h4>
     <div th:if="${members.size()>0}">
         <h3>Shared With:</h3>

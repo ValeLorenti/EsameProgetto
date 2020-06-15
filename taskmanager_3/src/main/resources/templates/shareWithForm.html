@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>TaskManager</title>
+</head>
+<body>
+
+	<h1>Share with users</h1>
+	<h2>All users</h2>
+	<div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Share</th>
+					<th>UserName</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="credentials : ${allCredentials}">
+					<td><a
+						th:href="@{'/project/shareWith' + '/' + ${credentials.userName} + '/' + ${project.id}}">Share with</a></td>
+					<td th:text="${credentials.userName}"></td>
+					<td th:text="${credentials.user.firstName}"></td>
+					<td th:text="${credentials.user.lastName}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

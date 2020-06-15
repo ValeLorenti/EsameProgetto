@@ -1,10 +1,10 @@
 package it.uniroma3.siw.taskmanager.repository;
-import it.uniroma3.siw.taskmanager.model.Project;
-import it.uniroma3.siw.taskmanager.model.User;
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-import java.util.Optional;
+import it.uniroma3.siw.taskmanager.model.Project;
+import it.uniroma3.siw.taskmanager.model.User;
 
 /**
  * This interface is a CrudRepository for repository operations on Users.
