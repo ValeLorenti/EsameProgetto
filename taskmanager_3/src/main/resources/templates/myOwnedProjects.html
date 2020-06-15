@@ -22,6 +22,7 @@
 						th:text="${project.name}"></a></td>
 					<td th:text="${project.description}">...</td>
 					<td><a th:href="'/delete/' + ${project.id}">Delete</a></td>
+					<td><a th:href="'/task/addTaskForm/' + ${project.id}">Add Task</a>
 				</tr>
 			</tbody>
 		</table>

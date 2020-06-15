@@ -51,7 +51,7 @@ public class ProjectController {
 		return "myOwnedProjects";
 	}
 	@RequestMapping(value = {"/projects/{projectId}"}, method = RequestMethod.GET)
-	public String project(Model model, @PathVariable Long projectId) {
+	public String project(@PathVariable Long projectId, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = projectService.getProject(projectId);
 		if(project == null)
@@ -94,13 +94,13 @@ public class ProjectController {
 
 
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.GET)
-	public String deleteProject(@PathVariable("id")Long id,Model model) {
+	public String deleteProject(@PathVariable("id")Long id, Model model) {
 		this.projectService.deleteProject(id);
 		return "redirect:/projects/";
 	}
 	
 	@RequestMapping(value = { "/project/shareWithForm/{id}" }, method = RequestMethod.GET)
-	public String shareWithForm(@PathVariable("id") Long id, Model model) {
+	public String shareWithForm(@PathVariable("id")Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = this.projectService.getProject(id);
 		model.addAttribute("project", project);
@@ -116,7 +116,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = { "/project/shareWith/{userName}/{id}" }, method = RequestMethod.GET)
-	public String shareWith(@PathVariable("id") Long id,@PathVariable String userName, Model model) {
+	public String shareWith(@PathVariable("id")Long id, @PathVariable String userName, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = this.projectService.getProject(id);
 		User member = this.credentialsService.getCredentials(userName).getUser();
@@ -133,4 +133,28 @@ public class ProjectController {
 		model.addAttribute("sharedProjects", this.projectService.retrieveProjectsMemberBy(loggedUser));
 		return "sharedProjects";
 	}
+	
+	@RequestMapping(value="/project/update/{id}",method=RequestMethod.GET)
+	public String updateProjectForm (@PathVariable("id")Long projectId, Model model) {
+		User loggedUser = sessionData.getLoggedUser();
+	    Project project = this.projectService.getProject(projectId);
+		
+		model.addAttribute("userForm", loggedUser);
+		model.addAttribute("project", project);
+	
+		return "updateMyProjectForm";
+	}
+	
+	@RequestMapping(value="/project/me/update/{id}",method=RequestMethod.POST)
+	public String updateProject(@PathVariable("id")Long projectId,
+			@Valid @ModelAttribute("project") Project newProject,
+			Model model) {
+		Project oldProject = this.projectService.getProject(projectId);
+		oldProject.setName(newProject.getName());
+		oldProject.setDescription(newProject.getDescription());
+		
+		this.projectService.saveProject(oldProject);
+		return "updatedProjectSuccessful";
+	}
+	
 }

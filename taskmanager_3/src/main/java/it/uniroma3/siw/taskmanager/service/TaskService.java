@@ -23,7 +23,7 @@ public class TaskService {
      * @return the retrieved Task, or null if no Task with the passed ID could be found in the DB
      */
     @Transactional
-    public Task getTask(long id) {
+    public Task getTask(Long id) {
         Optional<Task> result = this.taskRepository.findById(id);
         return result.orElse(null);
     }

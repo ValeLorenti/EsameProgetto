@@ -56,7 +56,7 @@ public class AuthenticationController {
      * @return the name of the target view, that in this case is "register"
      */
     @RequestMapping(value = { "/users/register" }, method = RequestMethod.POST)
-    public String registerUser(@Valid @ModelAttribute("userForm") User user,
+    public String registerUser(@Valid @ModelAttribute("userForm")User user,
                                BindingResult userBindingResult,
                                @Valid @ModelAttribute("credentialsForm") Credentials credentials,
                                BindingResult credentialsBindingResult,

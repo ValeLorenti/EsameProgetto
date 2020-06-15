@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+<head>
+<title>TaskManager</title>
+</head>
+
+
+
+<body>
+	<h1>Update Task</h1>
+	<form th:action="@{'/task/me/update' + '/' + ${task.id}}"
+		method="POST">
+		<table>
+			<tr>
+				<td><label for="taskNameInput">Name</label>
+				<td><input id=taskNameInput type="text"
+					th:field="${task.name}" placeholder="NAME"
+					required /></td>
+				<td th:if="${#fields.hasErrors('task.name')}"
+					th:errors="${task.name}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td><label for="Description">Description</label></td>
+				<td><input id="Description" type="text"
+					th:field="${task.description}" placeholder="DESCRIPTION" /></td>
+				<td th:if="${#fields.hasErrors('task.description')}"
+					th:errors="${task.description}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">Update</button>
+				</td>
+
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

@@ -98,7 +98,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "/admin/users/{username}/delete" }, method = RequestMethod.POST)
-	public String removeUser(Model model, @PathVariable String username) {
+	public String removeUser(@PathVariable String username, Model model) {
 		this.credentialsService.deleteCredentials(username);
 		return "redirect:/admin/users";
 	}
@@ -115,7 +115,7 @@ public class UserController {
 
 	
 	@RequestMapping (value = {"/users/me/update/{id}"}, method = RequestMethod.POST)
-	public String updateUser(@PathVariable("id") Long credentialsId,
+	public String updateUser(@PathVariable("id")Long credentialsId,
 			@Valid @ModelAttribute("userForm") User newUser,
 			@Valid @ModelAttribute("credentialsForm") Credentials newCredentials,
 			Model model) {
