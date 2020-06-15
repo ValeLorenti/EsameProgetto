@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.taskmanager.model.Project;
+import it.uniroma3.siw.taskmanager.model.Task;
 import it.uniroma3.siw.taskmanager.model.User;
 import it.uniroma3.siw.taskmanager.repository.ProjectRepository;
 
@@ -76,5 +77,11 @@ public class ProjectService {
 	@Transactional
 	public List<Project> retrieveProjectsMemberBy(User loggedUser) {
 		return this.projectRepository.findByMembers(loggedUser);
+	}
+	
+	@Transactional
+	public Project addTasktoProject(Project project, Task task) {
+		project.getTasks().add(task);
+		return this.projectRepository.save(project);
 	}
 }

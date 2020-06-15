@@ -1,6 +1,7 @@
 package it.uniroma3.siw.taskmanager.controller;
 
 import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +16,6 @@ import it.uniroma3.siw.taskmanager.controller.validation.CredentialsValidator;
 import it.uniroma3.siw.taskmanager.controller.validation.UserValidator;
 import it.uniroma3.siw.taskmanager.model.Credentials;
 import it.uniroma3.siw.taskmanager.model.User;
-import it.uniroma3.siw.taskmanager.repository.UserRepository;
 import it.uniroma3.siw.taskmanager.service.CredentialsService;
 import it.uniroma3.siw.taskmanager.service.UserService;
 
@@ -24,9 +24,6 @@ import it.uniroma3.siw.taskmanager.service.UserService;
  */
 @Controller
 public class UserController {
-
-	@Autowired
-	UserRepository userRepository;
 
 	@Autowired
 	UserService userService;
