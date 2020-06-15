@@ -74,7 +74,6 @@ public class UserController {
 		System.out.println(credentials.getPassword());
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("credentials", credentials);
-
 		return "userProfile";
 	}
 
@@ -96,10 +95,8 @@ public class UserController {
 	public String usersList(Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Credentials> allCredentials = this.credentialsService.getAllCredentials();
-
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("allCredentials", allCredentials);
-
 		return "allUsers";
 	}
 
@@ -128,7 +125,6 @@ public class UserController {
 
 		Credentials oldCredentials = this.credentialsService.getCredentials(credentialsId);
 		User oldUser = oldCredentials.getUser();
-
 		oldUser.setFirstName(newUser.getFirstName());
 		oldUser.setLastName(newUser.getFirstName());
 		oldCredentials.setUserName(newCredentials.getUserName());

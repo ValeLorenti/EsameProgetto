@@ -42,7 +42,7 @@ public class ProjectController {
 	SessionData sessionData;
 
 
-	@RequestMapping(value= {"/projects"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/projects"}, method = RequestMethod.GET)
 	public String myOwnedProjects(Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Project> projectsList = projectService.retrieveProjectsOwnedBy(loggedUser);
@@ -50,9 +50,8 @@ public class ProjectController {
 		model.addAttribute("projectsList", projectsList);
 		return "myOwnedProjects";
 	}
-	@RequestMapping(value= {"/projects/{projectId}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/projects/{projectId}"}, method = RequestMethod.GET)
 	public String project(Model model, @PathVariable Long projectId) {
-
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = projectService.getProject(projectId);
 		if(project == null)
@@ -61,7 +60,7 @@ public class ProjectController {
 		List<User> members = userService.getMembers(project);
 		if(!project.getOwner().equals(loggedUser) && !members.contains(loggedUser))
 			return "redirect:/projects";	
-
+		
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("project", project);
 		model.addAttribute("members", members);
@@ -70,7 +69,7 @@ public class ProjectController {
 
 	}
 
-	@RequestMapping(value= { "/projects/add" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/projects/add" }, method = RequestMethod.GET)
 	public String createProjectForm(Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("loggedUser", loggedUser);
@@ -78,10 +77,10 @@ public class ProjectController {
 		return "addProject";
 	}
 
-	@RequestMapping(value= { "/projects/add" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/projects/add" }, method = RequestMethod.POST)
 	public String createProject(@Valid @ModelAttribute("projectForm") Project project,
 			BindingResult projectBindingResult, Model model) {
-
+		
 		User loggedUser = sessionData.getLoggedUser();
 		projectValidator.validate(project, projectBindingResult);
 		if(!projectBindingResult.hasErrors()) {
@@ -89,19 +88,18 @@ public class ProjectController {
 			this.projectService.saveProject(project);
 			return "redirect:/projects/" + project.getId();
 		}
-
 		model.addAttribute("loggedUser", loggedUser);
 		return "addProject";
 	}
 
 
-	@RequestMapping(value= { "/delete/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.GET)
 	public String deleteProject(@PathVariable("id")Long id,Model model) {
 		this.projectService.deleteProject(id);
 		return "redirect:/projects/";
 	}
 	
-	@RequestMapping(value= { "/project/shareWithForm/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/project/shareWithForm/{id}" }, method = RequestMethod.GET)
 	public String shareWithForm(@PathVariable("id") Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = this.projectService.getProject(id);
@@ -117,7 +115,7 @@ public class ProjectController {
 		return "shareWithForm";
 	}
 	
-	@RequestMapping(value= { "/project/shareWith/{userName}/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/project/shareWith/{userName}/{id}" }, method = RequestMethod.GET)
 	public String shareWith(@PathVariable("id") Long id,@PathVariable String userName, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = this.projectService.getProject(id);

@@ -45,7 +45,6 @@ public class AuthenticationController {
     public String showRegisterForm(Model model) {
         model.addAttribute("userForm", new User());
         model.addAttribute("credentialsForm", new Credentials());
-
         return "registerUser";
     }
 
@@ -62,15 +61,10 @@ public class AuthenticationController {
                                @Valid @ModelAttribute("credentialsForm") Credentials credentials,
                                BindingResult credentialsBindingResult,
                                Model model) {
-
         // validate user and credentials fields
         this.userValidator.validate(user, userBindingResult);
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
-
-        // if neither of them had invalid contents, store the User and the Credentials into the DB
         if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
-            // set the user and store the credentials;
-            // this also stores the User, thanks to Cascade.ALL policy
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             return "registrationSuccessful";

@@ -22,7 +22,8 @@
 			<tbody>
 				<tr th:each="credentials : ${allCredentials}">
 					<td><a
-						th:href="@{'/project/shareWith' + '/' + ${credentials.userName} + '/' + ${project.id}}">Share with</a></td>
+						th:href="@{'/project/shareWith' + '/' + ${credentials.userName} + '/' + ${project.id}}">Share
+							with</a></td>
 					<td th:text="${credentials.userName}"></td>
 					<td th:text="${credentials.user.firstName}"></td>
 					<td th:text="${credentials.user.lastName}"></td>
