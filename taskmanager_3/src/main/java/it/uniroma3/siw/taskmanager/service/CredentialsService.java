@@ -1,15 +1,17 @@
 	package it.uniroma3.siw.taskmanager.service;
-import it.uniroma3.siw.taskmanager.model.Credentials;
-import it.uniroma3.siw.taskmanager.repository.CredentialsRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import it.uniroma3.siw.taskmanager.model.Credentials;
+import it.uniroma3.siw.taskmanager.model.Project;
+import it.uniroma3.siw.taskmanager.repository.CredentialsRepository;
 
 /**
  * The CredentialService handles logic regarding Credentials.
@@ -74,11 +76,27 @@ public class CredentialsService {
 		return result;
 	}
 
+	@Transactional
 	public void deleteCredentials(String username) {
 		Optional <Credentials> result = this.credentialsRepository.findByUserName(username);
-		if(result.isPresent()) {
+		if(result.isPresent()) 
 			this.credentialsRepository.deleteById(result.get().getId());
-		}
-
 	}
+	
+	/*Questo metodo mi torna tutte le credenziali degli user 
+	 * che sono membri del project dato
+	 */
+	@Transactional 
+	public List<Credentials> getMembersCredentialsByProject(Project project) {
+		List<Credentials> allCredentials = this.getAllCredentials();
+		List<Credentials> membersCredentials = new ArrayList<>();
+		for(Credentials credential : allCredentials) {
+			if(project.getMembers().contains(credential.getUser())) {
+				membersCredentials.add(credential);
+			}
+		}
+		return membersCredentials;
+	}
+	
+	
 }

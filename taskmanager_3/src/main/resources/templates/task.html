@@ -8,9 +8,10 @@
 
 <body>
 	<h1 th:text="${task.name}"></h1>
-	
 	<h4 th:text="${task.description}" style="color: green"></h4>
-	
-	<a th:href="@{'/task/update' + '/' + ${task.id}}">Update Task</a>
+	<a th:href="@{'/task/share/' + ${project.id} + '/' + ${task.id}}">share with members</a>
+	<a th:href="@{'/task/update/' + ${task.id}}">Update Task</a>
+	<h3>Shared with</h3>
+		<div th:text="${task.manager}"></div>
 </body>
 </html>

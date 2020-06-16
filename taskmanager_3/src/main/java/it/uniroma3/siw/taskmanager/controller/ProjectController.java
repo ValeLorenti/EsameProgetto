@@ -50,6 +50,7 @@ public class ProjectController {
 		model.addAttribute("projectsList", projectsList);
 		return "myOwnedProjects";
 	}
+	
 	@RequestMapping(value = {"/projects/{projectId}"}, method = RequestMethod.GET)
 	public String project(@PathVariable Long projectId, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
@@ -65,8 +66,6 @@ public class ProjectController {
 		model.addAttribute("project", project);
 		model.addAttribute("members", members);
 		return "project";
-
-
 	}
 
 	@RequestMapping(value = { "/projects/add" }, method = RequestMethod.GET)
@@ -99,7 +98,7 @@ public class ProjectController {
 		return "redirect:/projects/";
 	}
 	
-	@RequestMapping(value = { "/project/shareWithForm/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/project/shareProjectWithForm/{id}" }, method = RequestMethod.GET)
 	public String shareWithForm(@PathVariable("id")Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = this.projectService.getProject(id);
@@ -112,7 +111,7 @@ public class ProjectController {
 		allCredentials.remove(sessionData.getLoggedCredentials());
 		model.addAttribute("allCredentials", allCredentials);
 		model.addAttribute("loggedUser", loggedUser);
-		return "shareWithForm";
+		return "shareProjectWithForm";
 	}
 	
 	@RequestMapping(value = { "/project/shareWith/{userName}/{id}" }, method = RequestMethod.GET)

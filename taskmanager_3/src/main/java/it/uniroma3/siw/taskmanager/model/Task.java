@@ -49,6 +49,9 @@ public class Task {
      */
     @Column(nullable = false)
     private LocalDateTime lastUpdateTimestamp;
+    
+    @ManyToOne
+    private User manager;
 
     public Task() {}
 
@@ -129,6 +132,14 @@ public class Task {
     public void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
         this.lastUpdateTimestamp = lastUpdateTimestamp;
     }
+    
+	public User getManager() {
+		return manager;
+	}
+
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
 
     @Override
     public boolean equals(Object o) {
@@ -145,4 +156,5 @@ public class Task {
     public int hashCode() {
         return Objects.hash(name, completed, creationTimestamp, lastUpdateTimestamp);
     }
+
 }
