@@ -115,6 +115,10 @@ public class Project {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+    
+    public void deleteTaskById(Long taskId) {
+    tasks.removeIf(task->task.getId().equals(taskId));
+    }
 
     @Override
     public String toString() {

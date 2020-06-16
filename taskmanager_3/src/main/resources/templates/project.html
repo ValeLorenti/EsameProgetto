@@ -8,8 +8,7 @@
 
 <body>
 	<h1 th:text="${project.name}"></h1>
-	<a th:href="@{'/project/shareWithForm' + '/' + ${project.id}}">Share
-		this project</a>
+	<a th:href="@{'/project/shareWithForm' + '/' + ${project.id}}">Share this project</a>
 	<h4 th:text="${project.description}" style="color: orange"></h4>
 	<div th:if="${members.size()>0}">
 		<h3>Shared With:</h3>
@@ -20,14 +19,19 @@
 		</ul>
 	</div>
 	<a th:href="@{'/project/update' + '/' + ${project.id}}">Update Project</a>
-	<h3>Tasks</h3>
+	
+	<h3>Tasks</h3>   
+			
 	<a th:href="@{'/task/addTaskForm' + '/' + ${project.id}}">Add new task</a>
 	<ul>
 		<li th:each="task : ${project.tasks}">
-			<div th:text="${task.name}"></div>
-			<div th:text="${task.description}" style="color: orange"></div>
-		</li>
+		<form  th:action="@{'/projects/' + ${project.id} + '/deleteTask/' + ${task.id}}"
+	        method="POST">
+			<div th:text="${task.name}"></div> 
+			<div th:text="${task.description}" style="color: orange"></div><br>
+			<div><button type="submit" name="submit" value="value">Delete this Task</button></div>
+			 </form>   
+		</li>	 
 	</ul>
-	
 </body>
 </html>

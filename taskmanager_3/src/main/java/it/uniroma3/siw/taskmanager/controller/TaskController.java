@@ -2,6 +2,7 @@ package it.uniroma3.siw.taskmanager.controller;
 
 import javax.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import it.uniroma3.siw.taskmanager.controller.session.SessionData;
 import it.uniroma3.siw.taskmanager.controller.validation.TaskValidator;
 import it.uniroma3.siw.taskmanager.model.Credentials;
@@ -86,6 +86,23 @@ public class TaskController {
 		this.taskService.saveTask(oldTask);
 
 		return "updatedTaskSuccessful";
+	}
+
+	@RequestMapping(value = { "/projects/{projectId}/deleteTask/{taskId}" }, method = RequestMethod.POST)
+	public String deleteTask(@PathVariable("projectId")Long projectId, 
+			@PathVariable("taskId")Long taskId, Model model) {
+		User loggedUser = sessionData.getLoggedUser();
+		Project project = this.projectService.getProject(projectId);
+		User owner = project.getOwner();
+
+		if(loggedUser.equals(owner)) {
+			project.deleteTaskById(taskId);
+			this.taskService.deleteTask(this.taskService.getTask(taskId));
+			this.projectService.saveProject(project);
+			return "redirect:/projects/{projectId}";
+		}
+		else
+			return "redirect:/projects/{projectId}";
 	}
 
 }
