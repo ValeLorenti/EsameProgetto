@@ -47,6 +47,7 @@ public class TaskController {
 		model.addAttribute("project", project);
 		model.addAttribute("userForm", loggedUser);
 		model.addAttribute("credentialsForm", credentials);
+		model.addAttribute("taskForm", new Task());
 		return "addTaskForm";
 	}
 
@@ -63,7 +64,6 @@ public class TaskController {
 			model.addAttribute("project", project);
 			model.addAttribute("userForm", loggedUser);
 			model.addAttribute("task", task);
-			model.addAttribute("manager", task.getManager());
 			return "task";
 		}
 		return "redirect:/task/addTaskForm/{projectId}";
@@ -74,6 +74,7 @@ public class TaskController {
 	public String updateTaskForm(@PathVariable("id") Long taskId, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Task task = this.taskService.getTask(taskId);
+
 		model.addAttribute("userForm", loggedUser);
 		model.addAttribute("task", task);
 		return "updateMyTaskForm";	
@@ -84,9 +85,11 @@ public class TaskController {
 			@Valid @ModelAttribute("task") Task newTask,
 			Model model) {
 		Task oldTask = this.taskService.getTask(taskId);
+
 		oldTask.setName(newTask.getName());
 		oldTask.setDescription(newTask.getDescription());
 		this.taskService.saveTask(oldTask);
+
 		return "updatedTaskSuccessful";
 	}
 
@@ -125,15 +128,12 @@ public class TaskController {
 		Task task = this.taskService.getTask(taskId);
 		task.setManager(member);
 		this.taskService.saveTask(task);
-		return "redirect:/task/{taskId}/{projectId}";
+		return "redirect:/task/{taskId}";
 	}
 	
-	@RequestMapping(value = { "/task/{taskId}/{projectId}" }, method = RequestMethod.GET)
-	public String taskView(@PathVariable("taskId") Long taskId,
-			@PathVariable("projectId") Long projectId, Model model) {
-		Task task = this.taskService.getTask(taskId);
-		model.addAttribute("task", task);
-		model.addAttribute("project", this.projectService.getProject(projectId));
+	@RequestMapping(value = { "/task/{taskId}" }, method = RequestMethod.GET)
+	public String taskView(@PathVariable("taskId") Long taskId, Model model) {
+		model.addAttribute("task", this.taskService.getTask(taskId));
 		return "task";
 	}
 

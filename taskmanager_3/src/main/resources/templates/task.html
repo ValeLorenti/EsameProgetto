@@ -12,6 +12,6 @@
 	<a th:href="@{'/task/share/' + ${project.id} + '/' + ${task.id}}">share with members</a>
 	<a th:href="@{'/task/update/' + ${task.id}}">Update Task</a>
 	<h3>Shared with</h3>
-		<div th:text="${task.manager.firstName}"></div>
+		<div th:text="${task.manager}"></div>
 </body>
 </html>
