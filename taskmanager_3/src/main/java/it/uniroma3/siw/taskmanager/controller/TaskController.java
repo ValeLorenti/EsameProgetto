@@ -49,7 +49,7 @@ public class TaskController {
 
 	@RequestMapping(value = { "/task/add/{projectId}" }, method = RequestMethod.POST)
 	public String addTask(@PathVariable("projectId") Long projectId,
-			@Valid@ModelAttribute("taskForm") Task task, 
+			@Valid @ModelAttribute("taskForm") Task task, 
 			BindingResult taskBindingResult, 
 			Model model) {
 		User loggedUser = this.sessionData.getLoggedUser();

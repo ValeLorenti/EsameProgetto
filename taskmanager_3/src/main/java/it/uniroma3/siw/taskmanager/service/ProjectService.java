@@ -84,8 +84,7 @@ public class ProjectService {
 	
 	@Transactional
 	public void addTaskToProject(Project project, Task task) {
-		List<Task> tasksInProject = project.getTasks();
-		tasksInProject.add(task);
+	    project.getTasks().add(task);
 		this.projectRepository.save(project);
 	}
 }
