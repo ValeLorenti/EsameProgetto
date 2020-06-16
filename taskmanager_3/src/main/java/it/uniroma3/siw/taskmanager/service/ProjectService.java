@@ -11,6 +11,7 @@ import it.uniroma3.siw.taskmanager.model.Project;
 import it.uniroma3.siw.taskmanager.model.Task;
 import it.uniroma3.siw.taskmanager.model.User;
 import it.uniroma3.siw.taskmanager.repository.ProjectRepository;
+import it.uniroma3.siw.taskmanager.repository.TaskRepository;
 
 /**
  * The ProjectService handles logic for Projects.
@@ -21,6 +22,8 @@ public class ProjectService {
 
 	@Autowired
 	protected ProjectRepository projectRepository;
+	
+
 
 	/**
 	 * This method retrieves a Project from the DB based on its ID.
@@ -80,8 +83,9 @@ public class ProjectService {
 	}
 	
 	@Transactional
-	public Project addTasktoProject(Project project, Task task) {
-		project.getTasks().add(task);
-		return this.projectRepository.save(project);
+	public void addTaskToProject(Project project, Task task) {
+		List<Task> tasksInProject = project.getTasks();
+		tasksInProject.add(task);
+		this.projectRepository.save(project);
 	}
 }
