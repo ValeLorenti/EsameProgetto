@@ -19,10 +19,8 @@
 		</ul>
 	</div>
 	<a th:href="@{'/project/update' + '/' + ${project.id}}">Update Project</a>
-	
-	<h3>Tasks</h3>   
-			
-	<a th:href="@{'/task/addTaskForm' + '/' + ${project.id}}">Add new task</a>
+	<h3>Tasks</h3>   		
+	<a th:href="@{'/task/addTaskForm/' + ${project.id}}">Add new task</a>
 	<ul>
 		<li th:each="task : ${project.tasks}">
 		<form  th:action="@{'/projects/' + ${project.id} + '/deleteTask/' + ${task.id}}"

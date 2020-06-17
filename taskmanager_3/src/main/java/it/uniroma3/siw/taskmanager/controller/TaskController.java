@@ -39,12 +39,13 @@ public class TaskController {
 	@Autowired
 	CredentialsService credentialsService;
 
-	@RequestMapping(value = { "/task/addTaskForm/{id}" }, method = RequestMethod.GET)
-	public String addTaskForm(@PathVariable("id") Long projectId, Model model) {
+	@RequestMapping(value = { "/task/addTaskForm/{projectId}" }, method = RequestMethod.GET)
+	public String addTaskForm(@PathVariable("projectId") Long projectId, Model model) {
 		Credentials credentials = this.sessionData.getLoggedCredentials();
 		User loggedUser = this.sessionData.getLoggedUser();
 		Project project = this.projectService.getProject(projectId);
 		model.addAttribute("project", project);
+		model.addAttribute("taskForm", new Task());
 		model.addAttribute("userForm", loggedUser);
 		model.addAttribute("credentialsForm", credentials);
 		return "addTaskForm";
