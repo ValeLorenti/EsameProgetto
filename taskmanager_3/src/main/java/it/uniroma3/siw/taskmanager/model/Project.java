@@ -51,10 +51,15 @@ public class Project {
             cascade = CascadeType.ALL)   // if a Project is deleted, all its tasks must be deleted too
     @JoinColumn(name="project_id")
     private List<Task> tasks;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    private List<Tag> tags;
 
     public Project() {
         this.members = new ArrayList<>();
         this.tasks = new ArrayList<>();
+        this.tags = new ArrayList<>();
     }
 
     public Project(String name, String description) {
@@ -120,7 +125,15 @@ public class Project {
     tasks.removeIf(task->task.getId().equals(taskId));
     }
 
-    @Override
+    public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+	@Override
     public String toString() {
 
         return "Project{" +

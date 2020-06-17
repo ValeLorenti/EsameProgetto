@@ -1,8 +1,19 @@
 package it.uniroma3.siw.taskmanager.model;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 /**
  * A Task is a unitary activity managed by the TaskManager.
@@ -52,8 +63,13 @@ public class Task {
     
     @ManyToOne
     private User manager;
+    
+    @ManyToMany
+    private List<Tag> tags;
 
-    public Task() {}
+    public Task() {
+    	this.tags = new ArrayList<>();
+    }
 
     public Task(String name,
                 String description,
@@ -141,7 +157,15 @@ public class Task {
 		this.manager = manager;
 	}
 
-    @Override
+    public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
