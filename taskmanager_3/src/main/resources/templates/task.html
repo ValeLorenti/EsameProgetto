@@ -5,12 +5,13 @@
 <meta charset="UTF-8">
 <title>TaskManager</title>
 </head>
-<body>
+<body link="blue">
+     <font color="grey" size="5">your task</font>
 	<h1 th:text="${task.name}"></h1>
-	<h4 th:text="${task.description}" style="color: green"></h4>
-	<a th:href="@{'/task/share/' + ${project.id} + '/' + ${task.id}}">share with members</a>
+	<h3 th:text="${task.description}" style="color: green"></h3>
+	<a th:href="@{'/task/share/' + ${project.id} + '/' + ${task.id}}">Share with Members</a><br><br>
 	<a th:href="@{'/task/update/' + ${task.id}}">Update Task</a>
-	<h3>Shared with</h3>
+	<h4>Shared with</h4>
 		<div th:if="${task.manager!=null}">
 		<div th:text="${task.manager.firstName} + '' + ${task.manager.LastName}"></div>
 		</div>

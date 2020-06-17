@@ -6,7 +6,7 @@
 <title>TaskManager</title>
 </head>
 
-<body>
+<body link="blue">
 	<h1 th:text="${project.name}"></h1>
 	<a th:href="@{'/project/shareProjectWithForm' + '/' + ${project.id}}">Share this project</a>
 	<h4 th:text="${project.description}" style="color: orange"></h4>
