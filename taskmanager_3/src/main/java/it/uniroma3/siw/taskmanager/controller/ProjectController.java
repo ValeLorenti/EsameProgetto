@@ -55,6 +55,7 @@ public class ProjectController {
 	public String project(@PathVariable Long projectId, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Project project = projectService.getProject(projectId);
+		
 		if(project == null)
 			return "redirect:/projects";	
 
@@ -103,11 +104,23 @@ public class ProjectController {
 		Project project = this.projectService.getProject(id);
 		model.addAttribute("project", project);
 		List<Credentials> allCredentials = this.credentialsService.getAllCredentials();
+		List<User> members = project.getMembers();
+		
 		
 		/*rimuovo me stesso per non apparire tra gli utenti con cui 
 		 * posso condividere il progetto
 		 */
 		allCredentials.remove(sessionData.getLoggedCredentials());
+		
+		/*rimuovo gli utenti che man mano diventano membri
+		 * 
+		 */
+		List<Credentials> fakeList = this.credentialsService.getAllCredentials();
+		for(Credentials credentials : fakeList) {
+			if(members.contains(credentials.getUser()))
+				allCredentials.remove(credentials);
+		}
+		
 		model.addAttribute("allCredentials", allCredentials);
 		model.addAttribute("loggedUser", loggedUser);
 		return "shareProjectWithForm";
@@ -122,7 +135,7 @@ public class ProjectController {
 		this.userService.saveUser(member);
 		this.projectService.shareProjectWithUser(project, member);
 		model.addAttribute("loggedUser", loggedUser);
-		return"redirect:/projects";
+		return"redirect:/project/shareProjectWithForm/{id}";
 	}
 	
 	@RequestMapping(value = { "/sharedProjects" }, method = RequestMethod.GET)

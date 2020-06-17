@@ -1,5 +1,7 @@
 package it.uniroma3.siw.taskmanager.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import it.uniroma3.siw.taskmanager.controller.session.SessionData;
 import it.uniroma3.siw.taskmanager.controller.validation.TaskValidator;
 import it.uniroma3.siw.taskmanager.model.Credentials;
@@ -113,7 +114,12 @@ public class TaskController {
 			@PathVariable("taskId") Long taskId, Model model) {
 		Project project = this.projectService.getProject(projectId);
 		Task task = this.taskService.getTask(taskId);
-		model.addAttribute("membersCredentials", this.credentialsService.getMembersCredentialsByProject(project));
+		List<Credentials> membersCredentials = this.credentialsService.getMembersCredentialsByProject(project);
+		
+		/*Rimuovo le credenziali del manager dalla lista membersCredentials
+		 * 
+		 */
+		model.addAttribute("membersCredentials", membersCredentials);
 		model.addAttribute("project", project);
 		model.addAttribute("task", task);
 		return "shareTaskWithForm";
@@ -132,7 +138,9 @@ public class TaskController {
 	@RequestMapping(value = { "/task/{taskId}/{projectId}" }, method = RequestMethod.GET)
 	public String taskView(@PathVariable("taskId") Long taskId,
 			@PathVariable("projectId") Long projectId, Model model) {
+		User loggedUser = this.sessionData.getLoggedUser();
 		Task task = this.taskService.getTask(taskId);
+		model.addAttribute("userForm", loggedUser);
 		model.addAttribute("task", task);
 		model.addAttribute("project", this.projectService.getProject(projectId));
 		return "task";
