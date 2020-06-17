@@ -19,5 +19,12 @@
 		<div th:if="${task.manager!=null}">
 		<div th:text="${task.manager.firstName} + '' + ${task.manager.LastName}"></div>
 		</div>
+	<h4>Tags</h4>
+	<div th:if="${task.tags.size()>0}">
+	<div th:each="tag : ${task.tags}"></div>
+	<div><a th:href="@{'/tag/'+ ${tag.id} + ${task.id}}" th:text="${tag.name}"></a></div> 
+			<div th:text="${tag.description}" style="color: lightgreen"></div><br>
+	</div>
+	<a th:href="@{'/tag/addTagForm/' + ${task.id}}">Add Tag</a>
 </body>
 </html>

@@ -21,19 +21,19 @@ public class Tag {
 	private String name;
 	
 	@Column(nullable = false)
-	private String color;
+	private String colour;
 	
 	private String description;
 	
 	@ManyToMany(mappedBy = "tags")
-	private List<Task> taskAssociati;
+	private List<Task> linkedTasks;
 	
 	public Tag() {
-		this.taskAssociati = new ArrayList<>();
+		this.linkedTasks = new ArrayList<>();
 	}
 	
-	public Tag(String name, String color, String description) {
-		this.color = color;
+	public Tag(String name, String colour, String description) {
+		this.colour = colour;
 		this.name = name;
 		this.description = description;
 	}
@@ -54,12 +54,12 @@ public class Tag {
 		this.name = name;
 	}
 
-	public String getColor() {
-		return color;
+	public String getColour() {
+		return colour;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setColor(String colour) {
+		this.colour = colour;
 	}
 
 	public String getDescription() {
@@ -70,17 +70,17 @@ public class Tag {
 		this.description = description;
 	}
 
-	public List<Task> getTaskAssociati() {
-		return taskAssociati;
+	public List<Task> getlinkedTask() {
+		return linkedTasks;
 	}
 
-	public void setTaskAssociati(List<Task> taskAssociati) {
-		this.taskAssociati = taskAssociati;
+	public void setlinkedTask(List<Task> linkedTasks) {
+		this.linkedTasks = linkedTasks;
 	}
 
 	@Override
 	public String toString() {
-		return "Tag [id=" + id + ", name=" + name + ", color=" + color + ", description=" + description + "]";
+		return "Tag [id=" + id + ", name=" + name + ", colour=" + colour + ", description=" + description + "]";
 	}
 
 	@Override

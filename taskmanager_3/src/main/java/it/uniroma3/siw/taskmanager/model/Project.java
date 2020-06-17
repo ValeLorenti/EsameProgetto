@@ -41,7 +41,7 @@ public class Project {
     /**
      * Name for this Project
      */
-    @ManyToMany(fetch = FetchType.LAZY)                                // fetch is LAZY by default
+    @ManyToMany(fetch = FetchType.LAZY)    // fetch is LAZY by default
     private List<User> members;
 
     /**
@@ -52,7 +52,7 @@ public class Project {
     @JoinColumn(name="project_id")
     private List<Task> tasks;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private List<Tag> tags;
 

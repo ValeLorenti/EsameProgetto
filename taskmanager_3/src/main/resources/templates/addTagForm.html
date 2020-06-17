@@ -7,15 +7,15 @@
 </head>
 <body>
 
-	<h1>Create a New Task</h1>
-	<form th:action="@{'/task/add/' + ${project.id}}" 
+	<h1>Create a New Tag</h1>
+	<form th:action="@{'/tag/add/' + ${task.id}}" 
 	    method="POST"
-		th:object="${taskForm}">
+		th:object="${tagForm}">
 		
 		<table>
 			<tr>
-				<td><label for="taskNameInput">Task Name</label>
-				<td><input id=taskNameInput type="text" placeholder="NAME"
+				<td><label for="tagNameInput">Task Name</label>
+				<td><input id=tagNameInput type="text" placeholder="NAME"
 					required th:field="*{name}"/></td>
 				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
 					th:style="'color:red'"></td>	
@@ -27,9 +27,18 @@
 				<td th:if="${#fields.hasErrors('description')}"
 					th:errors="*{description}" th:style="'color:red'"></td>
 			</tr>
+			
+			<tr>
+				<td><label for="colourTag">ColourTag</label>
+				<td><input id="colourTag" placeholder="COLOURTAG"
+					th:field="*{colour}" /></td>
+				<td th:if="${#fields.hasErrors('colour')}"
+					th:errors="*{colour}" th:style="'color:red'"></td>
+			</tr>
+			
 			<tr>
 				<td>
-					<button type="submit">Add Task</button>
+					<button type="submit">Add Tag</button>
 				</td>
 			</tr>
 		</table>
