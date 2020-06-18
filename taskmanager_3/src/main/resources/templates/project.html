@@ -39,5 +39,13 @@
 			 </form>   
 		</li>	 
 	</ul>
+	<h3>Tags</h3>   
+	<div th:if="${loggedUser.id.equals(project.owner.id)}">		
+	<a th:href="@{'/tag/addTagForm/' + ${project.id}}">Add new tag</a>
+	</div>
+	<ul>
+		<li th:each="tag : ${project.tags}">
+		<div th:text="${tag.name} + '' + ${tag.colour}"></div>
+	</ul>
 </body>
 </html>

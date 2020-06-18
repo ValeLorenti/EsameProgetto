@@ -11,10 +11,12 @@
 	Color: <h2 th:text="${tag.colour}"></h2>
 	<h3 th:text="${tag.description}" style="color: green"></h3>
 	<h3>Linked Tasks</h3>
+	<div th:if="${linkedTasks.size()>0}">
 	   <ul>
 		 <li th:each="task : ${linkedTasks}">
-				<div th:text="${task.name}"></div>
+			<div th:text="${task.name}"></div>
 		 </li>
 	   </ul>
+	 </div>
 </body>
 </html>

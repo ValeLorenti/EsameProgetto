@@ -27,7 +27,7 @@
 	</div>
 	</div>
 	<div th:if="${(userForm.id.equals(project.owner.id))}">
-	<a th:href="@{'/tag/addTagForm/' + ${task.id}}">Add Tag</a>
+	<a th:href="@{'/tag/addExistingTag/' + ${task.id} + '/' + ${project.id}}">Add Tag</a>
 	</div>
 </body>
 </html>

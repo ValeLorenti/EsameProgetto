@@ -8,7 +8,7 @@
 <body>
 
 	<h1>Create a New Tag</h1>
-	<form th:action="@{'/tag/add/' + ${task.id}}" 
+	<form th:action="@{'/tag/add/' + ${project.id}}" 
 	    method="POST"
 		th:object="${tagForm}">
 		
@@ -41,6 +41,6 @@
 				</td>
 			</tr>
 		</table>
-	</form>
+	</form><br><br>
 </body>
 </html>

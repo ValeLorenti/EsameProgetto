@@ -6,4 +6,5 @@ import it.uniroma3.siw.taskmanager.model.Tag;
 
 public interface TagRepository extends CrudRepository<Tag, Long> {
 
+
 }
