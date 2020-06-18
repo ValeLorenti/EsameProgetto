@@ -10,12 +10,12 @@
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
 	<h1 th:text="${project.name}"></h1>
+	<h6 th:text="'Description: ' + ${project.description}" style="color: violet"></h6><br>
 	<div th:if="${loggedUser.id.equals(project.owner.id)}">
 	<a th:href="@{'/project/shareProjectWithForm' + '/' + ${project.id}}">
 			<button type="button" class="btn btn-outline-success">SHARE WITH</button>
 	</a>
-	 </div><br><br>
-	<h6 th:text="'Description: ' + ${project.description}" style="color: violet"></h6>
+	 </div><br>
 	<div th:if="${members.size()>0}">
 		<h3>Shared With:</h3>
 		<ul>
