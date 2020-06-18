@@ -23,10 +23,12 @@
 					<td><a th:href="'/projects/' + ${project.id}"
 						th:text="${project.name}"></a></td>
 					<td th:text="${project.description}">...</td>
-					<td><a th:href="'/task/addTaskForm/' + ${project.id}">Add Task</a>
+					<td><a th:href="'/task/addTaskForm/' + ${project.id}">
+					<button type="button" class="btn btn-outline-primary">ADD A TASK</button>
+					</a>
 					<td><form method="POST"
 							th:action="@{'/delete/' + ${project.id}}">
-							<button type="submit" name="submit" value="value">Delete this project</button>
+							<button type="submit" name="submit" value="value" class="btn btn-outline-danger">DELETE THIS PROJECT</button>
 						</form>
 					</td>
 				</tr>

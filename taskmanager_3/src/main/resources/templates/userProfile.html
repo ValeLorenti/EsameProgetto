@@ -9,7 +9,7 @@
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
 	<h1>My Profile</h1>
-	<table>
+	<table class="table table-hover">
 		<tr>
 			<td>UserName</td>
 			<td th:text="${credentials.userName}">...</td>
@@ -36,12 +36,10 @@
 		</tr>
 	</table>
 	<h4>
-		<a href="/users/update">Update your Profile</a>
+		<a href="/users/update">
+		<button type="button" class="btn btn-outline-primary">UPDATE YOUR PROFILE</button>
+		</a>
 	</h4>
 	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
-
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
-<header th:replace="fragments/base.html :: intestazione"></header>
-<footer th:replace="fragments/base.html :: fondo"></footer>-->

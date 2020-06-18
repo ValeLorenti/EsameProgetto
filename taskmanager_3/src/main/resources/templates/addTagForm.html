@@ -14,7 +14,7 @@
 	    method="POST"
 		th:object="${tagForm}">
 		
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label for="tagNameInput">Tag Name</label>
 				<td><input id=tagNameInput type="text" placeholder="NAME"
@@ -39,7 +39,7 @@
 			</tr>
 			<tr>
 				<td>
-					<button type="submit">Add Tag</button>
+					<button type="submit" name="submit" value="value" class="btn btn-outline-primary">ADD A TAG</button>
 				</td>
 			</tr>
 		</table>

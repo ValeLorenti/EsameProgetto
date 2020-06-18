@@ -9,10 +9,11 @@
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
      <font color="grey" size="5">your tag</font>
-	<h1 th:text="${tag.name}"></h1>
-	<h2 th:text="${tag.colour}"></h2>
-	<h3 th:text="${tag.description}" style="color: green"></h3>
-	<h3>Linked Tasks</h3>
+	<h2 th:text="${tag.name}"></h2>
+	<h6 th:text="'Description: ' + ${tag.description}" style="color: violet"></h6>
+	<h5 th:text="'Colour: ' + ${tag.colour}"></h5><br>
+	
+	<h4>Linked Tasks</h4>
 	<div th:if="${linkedTasks.size()>0}">
 	   <ul>
 		 <li th:each="task : ${linkedTasks}">

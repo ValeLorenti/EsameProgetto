@@ -14,7 +14,7 @@
 	    method="POST"
 		th:object="${taskForm}">
 		
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label for="taskNameInput">Task Name</label>
 				<td><input id=taskNameInput type="text" placeholder="NAME"
@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td>
-					<button type="submit">Add Task</button>
+					<button type="submit" name="submit" value="value" class="btn btn-outline-primary">ADD A TASK</button>
 				</td>
 			</tr>
 		</table>

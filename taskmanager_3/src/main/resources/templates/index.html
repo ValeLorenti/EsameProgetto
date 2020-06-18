@@ -8,13 +8,17 @@
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
 	<h1>Get started!</h1>
-	<h3>Login to create and manage your projects, customise your tasks and more</h3>
+	<h3>Login to create and manage your projects, customise your tasks and more</h3><br>
 	<p>
-		<a href="/login">Login</a>
+		<a href="/login">
+		<button type="button" class="btn btn-primary">LOGIN</button>
+		</a>
+		
+		<a href="/users/register">
+		<button type="button" class="btn btn-primary">REGISTER</button>
+		</a>
 	</p>
-	<p>
-		<a href="/users/register">Register</a>
-	</p>
+	
 </body>
 </html>
 

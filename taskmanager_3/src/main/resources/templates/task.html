@@ -8,19 +8,23 @@
 </head>
 <body>
 <header th:replace="fragments/base.html :: intestazione"></header>
-     <font color="grey" size="5">your task</font>
-	<h1 th:text="${task.name}"></h1>
-	<h3 th:text="${task.description}" style="color: green"></h3>
+     <font color="grey" size="4">your task</font>
+	<h3 th:text="${task.name}"></h3>
+	<h6 th:text="'Description: ' + ${task.description}" style="color: violet"></h6><br>
 	<div th:if="${(userForm.id.equals(project.owner.id))}">
-	<a th:href="@{'/task/share/' + ${project.id} + '/' + ${task.id}}">Share with Member</a><br><br>
+	<a th:href="@{'/task/share/' + ${project.id} + '/' + ${task.id}}">
+	<button type="button" class="btn btn-outline-primary">SHARE WITH MEMBER</button>
+	</a><br><br>
 	</div>
 	<div th:if="${userForm.id.equals(project.owner.id)}">
-	<a th:href="@{'/task/update/' + ${task.id}}">Update Task</a>
-	</div>
+	<a th:href="@{'/task/update/' + ${task.id}}">
+	<button type="button" class="btn btn-outline-warning">UPDATE TASK</button>
+	</a>
+	</div><br>
 	<h4>Shared with</h4>
 		<div th:if="${task.manager!=null}">
 		<div th:text="${task.manager.firstName} + '' + ${task.manager.LastName}"></div>
-		</div>
+		</div><br>
 	<h4>Tags</h4>
 	<div th:if="${task.tags.size()>0}">
 	<div th:each="tag : ${task.tags}">
@@ -29,19 +33,23 @@
 	</div>
 	</div>
 	<div th:if="${(userForm.id.equals(project.owner.id))}">
-	<a th:href="@{'/tag/addExistingTag/' + ${task.id} + '/' + ${project.id}}">Add Existing Tags</a>
-	</div>
+	<a th:href="@{'/tag/addExistingTag/' + ${task.id} + '/' + ${project.id}}">
+	<button type="button" class="btn btn-outline-primary">ADD EXISTING TAGS</button>
+	</a>
+	</div><br><br>
 	
-	<a th:href="'/projects/' + ${project.id} + '/task/' + ${task.id} + '/addComment/'">addComment</a>
+	<a th:href="'/projects/' + ${project.id} + '/task/' + ${task.id} + '/addComment/'">
+	<button type="button" class="btn btn-outline-primary">ADD A COMMENT</button>
+	</a>
 
-	<div th:if="${task.commenti.size()>0}">
-		<h3>Comments:</h3>
+	<div th:if="${task.commenti.size()>0}"><br>
+		<h4>Comments:</h4>
 		<ul>
 			<li th:each="commento : ${task.commenti}">
 				<div>
 					<div th:text=" ${commento.commento} "></div>
 					<div th:text="${commento.user.firstName} + ' ' + ${commento.user.lastName}"></div>
-				</div>
+				</div><br>
 					</li>
 		</ul>
 		</div>

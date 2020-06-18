@@ -3,6 +3,8 @@
 	xmlns:th="https://www.thymeleaf.org">
 	<link rel="stylesheet" type="text/css" href="../static/css/css.css"></link>
 <head>
+<link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
 <title>TaskManager</title>
 </head>
 <body>
@@ -11,14 +13,14 @@
 	<form id="shareProjectForm"
 		th:action="@{'/projects/' + ${project.id} + '/task/' + ${task.id} + '/addComment'}" method="POST">
 
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label for="commentInput">Commento</label>
 				<td><input id=commentInput type="text" placeholder="COMMENT"
 					th:name="commento" required /></td>
 			</tr>
 		</table>
-		<button type="submit">Add</button>
+		<button type="submit" name="submit" value="value" class="btn btn-outline-primary">ADD A COMMENT</button>
 	</form>
     <footer th:replace="fragments/base.html :: fondo"></footer>
 </body>

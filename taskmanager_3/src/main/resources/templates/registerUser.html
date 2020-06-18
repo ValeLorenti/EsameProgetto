@@ -12,7 +12,7 @@
 	<form id="registerUserForm" th:action="@{/users/register}"
 		method="POST">
 
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label for="userNameInput">Username</label>
 				<td><input id=userNameInput type="text"
@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<td>
-					<button type="submit">Register</button>
+					<button type="submit" name="submit" value="value" class="btn btn-primary">REGISTER</button>
 				</td>
 			</tr>
 		</table>

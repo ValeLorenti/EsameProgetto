@@ -10,7 +10,7 @@
 	<h1>Update Task</h1>
 	<form th:action="@{'/task/me/update' + '/' + ${task.id}}"
 		method="POST">
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label for="taskNameInput">Name</label>
 				<td><input id=taskNameInput type="text"

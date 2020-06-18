@@ -11,9 +11,11 @@
 <header th:replace="fragments/base.html :: intestazione"></header>
 	<h1 th:text="${project.name}"></h1>
 	<div th:if="${loggedUser.id.equals(project.owner.id)}">
-	<a th:href="@{'/project/shareProjectWithForm' + '/' + ${project.id}}">Share this project</a>
-	 </div>
-	<h4 th:text="${project.description}" style="color: orange"></h4>
+	<a th:href="@{'/project/shareProjectWithForm' + '/' + ${project.id}}">
+			<button type="button" class="btn btn-outline-success">SHARE WITH</button>
+	</a>
+	 </div><br><br>
+	<h6 th:text="'Description: ' + ${project.description}" style="color: violet"></h6>
 	<div th:if="${members.size()>0}">
 		<h3>Shared With:</h3>
 		<ul>
@@ -23,12 +25,16 @@
 		</ul>
 	</div>
 	<div th:if="${loggedUser.id.equals(project.owner.id)}">
-	<a th:href="@{'/project/update' + '/' + ${project.id}}">Update Project</a>
-	 </div>
+	<a th:href="@{'/project/update' + '/' + ${project.id}}">
+	<button type="button" class="btn btn-outline-warning">UPDATE PROJECT</button>
+	</a>
+	 </div><br><br>
 	<h3>Tasks</h3>   
 	<div th:if="${loggedUser.id.equals(project.owner.id)}">		
-	<a th:href="@{'/task/addTaskForm/' + ${project.id}}">Add new task</a>
-	</div>
+	<a th:href="@{'/task/addTaskForm/' + ${project.id}}">
+	<button type="button" class="btn btn-outline-primary">ADD A NEW TASK</button>
+	</a>
+	</div><br><br>
 	<ul>
 		<li th:each="task : ${project.tasks}">
 		<form  th:action="@{'/projects/' + ${project.id} + '/deleteTask/' + ${task.id}}"
@@ -36,14 +42,16 @@
 			<div><a th:href="'/task/' + ${task.id} + '/' + ${project.id}" th:text="${task.name}"></a></div> 
 			<div th:text="${task.description}" style="color: orange"></div><br>
 			<div th:if="${loggedUser.id.equals(project.owner.id)}">
-			<div><button type="submit" name="submit" value="value">Delete this Task</button></div><br><br>
+			<div><button type="submit" name="submit" value="value" class="btn btn-outline-danger">Delete this Task</button></div><br><br>
 			</div>
 			 </form>   
 		</li>	 
 	</ul>
 	<h3>Tags</h3>   
 	<div th:if="${loggedUser.id.equals(project.owner.id)}">		
-	<a th:href="@{'/tag/addTagForm/' + ${project.id}}">Add new tag</a>
+	<a th:href="@{'/tag/addTagForm/' + ${project.id}}">
+	<button type="button" class="btn btn-outline-primary">ADD A NEW TAG</button>
+	</a>
 	</div>
 	<ul>
 		<li th:each="tag : ${project.tags}">

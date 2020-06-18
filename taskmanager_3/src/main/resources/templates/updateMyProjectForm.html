@@ -10,7 +10,7 @@
 	<h1>Update Project</h1>
 	<form th:action="@{'/project/me/update' + '/'+ ${project.id}}"
 		method="POST">
-		<table>
+		<table class="table table-hover">
 			<tr>
 				<td><label for="projectNameInput">Name</label>
 				<td><input id=projectNameInput type="text"
@@ -28,7 +28,7 @@
 			</tr>
 			<tr>
 				<td>
-					<button type="submit">Update</button>
+					<button type="submit" name="submit" value="value" class="btn btn-outline-primary">Update</button>
 				</td>
 
 			</tr>
