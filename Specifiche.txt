@@ -1,0 +1,29 @@
+SPECIFICHE CASI D'USO IMPLEMENTATI
+
+USER
+-Caso d'uso UC1: un utente si registra nel sistema attraverso nome, cognome, username e password.
+-Caso d'uso UC2: un utente puó loggarsi attraverso username e password.
+-Caso d'uso UC3: l'utente loggato puó visualizzare il suo profilo.
+-Caso d'uso UC4: l'utente loggato puó modificare il suo profilo.
+
+PROJECT
+-Caso d'uso UC1: l'utente loggato puó creare un suo progetto, di cui sará il proprietario.
+-Caso d'uso UC2: l'utente loggato puó visualizzare i suoi progetti, ovvero i progetti di cui é proprietario.
+-Caso d'uso UC3: l'utente loggato puó visualizzare i progetti a lui condivisi da parte di altri utenti.
+-Caso d'uso UC5: l'utente loggato puó aggiornare i dati dei suoi progetti, ovvero i progetti di cui é proprietario.
+-Caso d'uso UC6: l'utente loggato puó eliminare i suoi progetti, ovvero i progetti di cui é proprietario.
+-Caso d'uso UC7: l'utente loggato puó condividere i suoi progetti, ovvero i progetti di cui é proprietario, con altri utenti.
+-Caso d'uso UC8: (specifiche estese) l'utente loggato puó aggiungere uno o piú tag ai suoi progetti, ovvero i progetti di cui é il proprietario.
+
+TASK
+-Caso d'uso UC1: l'utete loggato puó aggiungere un task ad un suo progetto, ovvero i progetti di cui é proprietario.
+-Caso d'uso UC2: l'utente loggato puó aggiornare i dati dei task dei suoi progetti, ovvero dei progetti di cui é proprietario.
+-Caso d'uso UC3: l'utente loggato puó eliminare i task dei suoi progetti, ovvero dei progetti di cui é proprietario.
+-Caso d'uso UC4: l'utente loggato puó assegnare i task di un suo progetto ad un membro (utente con cui condivide il progetto) del progetto stesso.
+-Caso d'uso UC5: (specifiche estese) l'utente loggato puó assegnare un tag ad un task di un suo progetto, ovvero un progetto di cui é il proprietario.
+-Caso d'uso UC6: (specifiche estese) l'utente loggato puó aggiungere un commento ad un task di un progetto a lui visibile (o di cui é il proprietario o di cui é membro)
+
+ 
+
+
+
