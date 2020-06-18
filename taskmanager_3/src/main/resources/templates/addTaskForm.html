@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td><label for="Description">Description</label>
-				<td><input id="Description" placeholder="DESCRIPTION"
+				<td><input type="text" id="Description" placeholder="DESCRIPTION"
 					th:field="*{description}" /></td>
 				<td th:if="${#fields.hasErrors('description')}"
 					th:errors="*{description}" th:style="'color:red'"></td>

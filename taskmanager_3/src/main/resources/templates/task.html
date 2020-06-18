@@ -21,10 +21,13 @@
 		</div>
 	<h4>Tags</h4>
 	<div th:if="${task.tags.size()>0}">
-	<div th:each="tag : ${task.tags}"></div>
-	<div><a th:href="@{'/tag/'+ ${tag.id} + ${task.id}}" th:text="${tag.name}"></a></div> 
+	<div th:each="tag : ${task.tags}">
+	<div><a th:href="@{'/tag/'+ ${tag.id} + '/' + ${task.id}}" th:text="${tag.name}"></a></div> 
 			<div th:text="${tag.description}" style="color: lightgreen"></div><br>
 	</div>
+	</div>
+	<div th:if="${(userForm.id.equals(project.owner.id))}">
 	<a th:href="@{'/tag/addTagForm/' + ${task.id}}">Add Tag</a>
+	</div>
 </body>
 </html>

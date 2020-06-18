@@ -1,7 +1,6 @@
 package it.uniroma3.siw.taskmanager.controller;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,28 +42,30 @@ public class TagController {
 	CredentialsService credentialsService;
 
 	@RequestMapping(value = { "/tag/addTagForm/{taskId}" }, method = RequestMethod.GET)
-	public String addTagForm(@PathVariable("taskId") Long taskId, Model model) {
+	public String addTagFormToTask(@PathVariable("taskId") Long taskId, Model model) {
 		Credentials credentials = this.sessionData.getLoggedCredentials();
 		User loggedUser = this.sessionData.getLoggedUser();
 		Task task = this.taskService.getTask(taskId);
 		model.addAttribute("loggedUser",loggedUser);
-		model.addAttribute("task",task);
+		model.addAttribute("task", task);
 		model.addAttribute("credentialsForm", credentials);
 		model.addAttribute("tagForm", new Tag());
 		return "addTagForm";
 	}
 
 	@RequestMapping(value = { "/tag/add/{taskId}" }, method = RequestMethod.POST)
-	public String addTag(@PathVariable("taskId") Long taskId,
+	public String addTagToTask(@PathVariable("taskId") Long taskId,
 			@Valid @ModelAttribute("tagForm") Tag tag, BindingResult tagBindingResult,
 			Model model) {
 		User loggedUser = this.sessionData.getLoggedUser();
 		this.tagValidator.validate(tag, tagBindingResult);
 		if(!tagBindingResult.hasErrors()) {
 			Task task = this.taskService.getTask(taskId);
+			tag.getlinkedTasks().add(task);
+			this.tagService.saveTag(tag);
 			task.getTags().add(tag);
-			tag.getlinkedTask().add(task);
-			this.tagService.save(tag);
+			this.taskService.saveTask(task);
+			model.addAttribute("linkedTasks", tag.getlinkedTasks());
 			model.addAttribute("userForm", loggedUser);
 			model.addAttribute("task", task);
 			model.addAttribute("tag", tag);

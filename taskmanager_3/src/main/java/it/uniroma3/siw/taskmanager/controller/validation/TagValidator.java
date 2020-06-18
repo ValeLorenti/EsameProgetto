@@ -9,6 +9,7 @@ import it.uniroma3.siw.taskmanager.model.Tag;
 public class TagValidator implements Validator {
 	final Integer MAX_NAME_LENGTH = 100;
 	final Integer MIN_NAME_LENGTH = 2;
+	final Integer MIN_COLOUR_LENGTH = 2;
 	final Integer MAX_DESCRIPTION_LENGTH = 200;
 	
 	@Override
@@ -16,6 +17,7 @@ public class TagValidator implements Validator {
 		Tag tag = (Tag) o;
 		String name = tag.getName().trim();
 		String description = tag.getDescription().trim();
+		//String colour = tag.getColour().trim();
 
 		if (name.isBlank())
 			errors.rejectValue("name", "required");
@@ -24,7 +26,12 @@ public class TagValidator implements Validator {
 			
 		if (description.length() > MAX_DESCRIPTION_LENGTH)
 			errors.rejectValue("description", "size");
-
+		
+		/*if (colour.isBlank())
+			errors.rejectValue("colour", "required");
+		else if(colour.length()<MIN_COLOUR_LENGTH)
+			errors.rejectValue("colour", "size");
+			*/
 	}
 
 	@Override

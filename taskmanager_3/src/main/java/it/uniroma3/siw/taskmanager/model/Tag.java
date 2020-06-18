@@ -20,7 +20,6 @@ public class Tag {
 	@Column(nullable = false)
 	private String name;
 	
-	@Column(nullable = false)
 	private String colour;
 	
 	private String description;
@@ -58,7 +57,7 @@ public class Tag {
 		return colour;
 	}
 
-	public void setColor(String colour) {
+	public void setColour(String colour) {
 		this.colour = colour;
 	}
 
@@ -70,7 +69,7 @@ public class Tag {
 		this.description = description;
 	}
 
-	public List<Task> getlinkedTask() {
+	public List<Task> getlinkedTasks() {
 		return linkedTasks;
 	}
 
