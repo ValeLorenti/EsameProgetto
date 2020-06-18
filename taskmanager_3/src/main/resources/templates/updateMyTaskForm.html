@@ -3,11 +3,10 @@
 	xmlns:th="https://www.thymeleaf.org">
 <head>
 <title>TaskManager</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
 </head>
-
-
-
 <body>
+<header th:replace="fragments/base.html :: intestazione"></header>
 	<h1>Update Task</h1>
 	<form th:action="@{'/task/me/update' + '/' + ${task.id}}"
 		method="POST">
@@ -35,5 +34,7 @@
 			</tr>
 		</table>
 	</form>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
+

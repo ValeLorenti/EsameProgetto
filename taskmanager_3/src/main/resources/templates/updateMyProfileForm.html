@@ -4,16 +4,15 @@
 <head>
 <style>
 ::placeholder {
-  color: lightblue;
+  color: black;
   opacity: 1; 
 }
 </style>
 <title>TaskManager</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
 </head>
-
-
-
 <body>
+<header th:replace="fragments/base.html :: intestazione"></header>
 	<h1>Update Profile</h1>
 	<form th:action="@{'/users/me/update/'+ ${credentialsForm.id}}"
 		method="POST">
@@ -56,5 +55,8 @@
 			</tr>
 		</table>
 	</form>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
+
+

@@ -2,11 +2,13 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
 <meta charset="UTF-8">
 <title>TaskManager</title>
 </head>
 
 <body>
+<header th:replace="fragments/base.html :: intestazione"></header>
 	<h1 th:text="${project.name}"></h1>
 	<div th:if="${loggedUser.id.equals(project.owner.id)}">
 	<a th:href="@{'/project/shareProjectWithForm' + '/' + ${project.id}}">Share this project</a>
@@ -47,5 +49,7 @@
 		<li th:each="tag : ${project.tags}">
 		<div th:text="${tag.name} + '' + ${tag.colour}"></div>
 	</ul>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
+

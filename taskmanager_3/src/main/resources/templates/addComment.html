@@ -5,11 +5,9 @@
 <head>
 <title>TaskManager</title>
 </head>
-
 <body>
-
+    <header th:replace="fragments/base.html :: intestazione"></header>
 	<h1>Share a Project</h1>
-
 	<form id="shareProjectForm"
 		th:action="@{'/projects/' + ${project.id} + '/task/' + ${task.id} + '/addComment'}" method="POST">
 
@@ -22,6 +20,6 @@
 		</table>
 		<button type="submit">Add</button>
 	</form>
-	
+    <footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

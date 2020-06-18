@@ -2,9 +2,11 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
 <title>TaskManager</title>
 </head>
 <body>
+<header th:replace="fragments/base.html :: intestazione"></header>
 	<h1>Get started!</h1>
 	<h3>Login to create and manage your projects, customise your tasks and more</h3>
 	<p>
@@ -15,3 +17,4 @@
 	</p>
 </body>
 </html>
+

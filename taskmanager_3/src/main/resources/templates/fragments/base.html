@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles(title)">
+<meta charset="UTF-8" />
+<link th:href="@{/css/my-style.css}" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+	<header th:fragment="intestazione" style="text-align: center;">
+		<br>
+		<img
+			src="https://news.rambler.ru/img/2017/08/25152517.435513.8831.png"
+			width="600" height="300"><br>
+		<br>
+	</header>
+
+	<p>Go to the next page to see fragments in action</p>
+
+	<footer th:fragment="fondo">
+		<br>
+		<br>
+		<a href="/home">
+			<button type="button" class="btn btn-outline-info">HOME</button>
+		</a>
+	</footer>
+</body>
+</html>

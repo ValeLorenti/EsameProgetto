@@ -2,13 +2,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org">
 <head>
+	<link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
 <meta charset="UTF-8">
 <title>TaskManager</title>
 </head>
 <body>
+    <header th:replace="fragments/base.html :: intestazione"></header>
+
 	<h1 th:text="'Welcome, Admin ' + ${user.firstName} + '!'"></h1>
 	<h4>
 		<a href="/admin/users">All Users List</a>
 	</h4>
+	 <footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
+

@@ -2,10 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
 <meta charset="UTF-8">
 <title>TaskManager</title>
 </head>
 <body>
+<header th:replace="fragments/base.html :: intestazione"></header>
      <font color="grey" size="5">your task</font>
 	<h1 th:text="${task.name}"></h1>
 	<h3 th:text="${task.description}" style="color: green"></h3>
@@ -43,6 +45,12 @@
 					</li>
 		</ul>
 		</div>
-	
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
+
+
+
+
+
+

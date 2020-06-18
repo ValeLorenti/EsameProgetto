@@ -2,26 +2,35 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org">
 <head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>TaskManager</title>
 </head>
 <body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
 	<h1 th:text="'Welcome, ' + ${user.firstName} + '!'"></h1>
+	<br>
 	<h4>
 		<a href="/projects">My Projects</a>
 	</h4>
+	<br>
 	<h4>
 		<a href="/sharedProjects">Shared with me</a>
 	</h4>
+	<br>
 	<h4>
-		<a href="/projects/add">Create new Project</a>
+		<a href="/projects/add">Create a new Project</a>
 	</h4>
+	<br>
 	<h4>
 		<a href="/users/me">Profile</a>
 	</h4>
+	<br>
 	<h4>
 		<a href="/logout">Logout</a>
 	</h4>
-
+    <footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
+
