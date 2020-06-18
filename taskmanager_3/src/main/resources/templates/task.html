@@ -27,7 +27,22 @@
 	</div>
 	</div>
 	<div th:if="${(userForm.id.equals(project.owner.id))}">
-	<a th:href="@{'/tag/addExistingTag/' + ${task.id} + '/' + ${project.id}}">Add Tag</a>
+	<a th:href="@{'/tag/addExistingTag/' + ${task.id} + '/' + ${project.id}}">Add Existing Tags</a>
 	</div>
+	
+	<a th:href="'/projects/' + ${project.id} + '/task/' + ${task.id} + '/addComment/'">addComment</a>
+
+	<div th:if="${task.commenti.size()>0}">
+		<h3>Comments:</h3>
+		<ul>
+			<li th:each="commento : ${task.commenti}">
+				<div>
+					<div th:text=" ${commento.commento} "></div>
+					<div th:text="${commento.user.firstName} + ' ' + ${commento.user.lastName}"></div>
+				</div>
+					</li>
+		</ul>
+		</div>
+	
 </body>
 </html>

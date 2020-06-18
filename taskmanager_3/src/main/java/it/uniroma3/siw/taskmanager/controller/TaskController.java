@@ -21,6 +21,8 @@ import it.uniroma3.siw.taskmanager.model.User;
 import it.uniroma3.siw.taskmanager.service.CredentialsService;
 import it.uniroma3.siw.taskmanager.service.ProjectService;
 import it.uniroma3.siw.taskmanager.service.TaskService;
+import it.uniroma3.siw.taskmanager.model.Commento;
+import it.uniroma3.siw.taskmanager.service.CommentoService;
 
 @Controller
 public class TaskController {
@@ -36,9 +38,12 @@ public class TaskController {
 
 	@Autowired
 	TaskValidator taskValidator;
-	
+
 	@Autowired
 	CredentialsService credentialsService;
+
+	@Autowired
+	private CommentoService commentoService;
 
 	@RequestMapping(value = { "/task/addTaskForm/{projectId}" }, method = RequestMethod.GET)
 	public String addTaskForm(@PathVariable("projectId") Long projectId, Model model) {
@@ -108,14 +113,14 @@ public class TaskController {
 		else
 			return "redirect:/projects/{projectId}";
 	}
-	
+
 	@RequestMapping(value = { "/task/share/{projectId}/{taskId}" }, method = RequestMethod.GET)
 	public String shareTaskWithForm(@PathVariable("projectId") Long projectId, 
 			@PathVariable("taskId") Long taskId, Model model) {
 		Project project = this.projectService.getProject(projectId);
 		Task task = this.taskService.getTask(taskId);
 		List<Credentials> membersCredentials = this.credentialsService.getMembersCredentialsByProject(project);
-		
+
 		/*Rimuovo le credenziali del manager dalla lista membersCredentials
 		 * 
 		 */
@@ -124,7 +129,7 @@ public class TaskController {
 		model.addAttribute("task", task);
 		return "shareTaskWithForm";
 	}
-	
+
 	@RequestMapping(value = { "/task/shareTaskWith/{userName}/{taskId}/{projectId}" }, method = RequestMethod.POST)
 	public String shareTaskWith(@PathVariable("userName") String userName, 
 			@PathVariable("taskId") Long taskId, @PathVariable("projectId") Long projectId, Model model) {
@@ -134,7 +139,7 @@ public class TaskController {
 		this.taskService.saveTask(task);
 		return "redirect:/task/{taskId}/{projectId}";
 	}
-	
+
 	@RequestMapping(value = { "/task/{taskId}/{projectId}" }, method = RequestMethod.GET)
 	public String taskView(@PathVariable("taskId") Long taskId,
 			@PathVariable("projectId") Long projectId, Model model) {
@@ -146,29 +151,46 @@ public class TaskController {
 		return "task";
 	}
 
+	@RequestMapping( value = {"/projects/{projectId}/task/{taskId}/addComment"}, method = RequestMethod.GET)
+	public String addComment(Model model, @PathVariable("projectId") Long projectId,
+			@PathVariable("taskId") Long taskId) {
+
+		Project project = projectService.getProject(projectId);
+		User loggedUser = sessionData.getLoggedUser();
+
+		if((project.getMembers().contains(loggedUser))||(project.getOwner().equals(loggedUser))) {
+			Task task = taskService.getTask(taskId);
+			String commento = new String();
+			model.addAttribute("project", project);
+			model.addAttribute("task", task);
+			model.addAttribute("commento", commento);
+			return "addComment";
+		}
+		return "redirect:/projects/{projectId}/task/{taskId}";
+	}
+
+	@RequestMapping( value = {"/projects/{projectId}/task/{taskId}/addComment"}, method = RequestMethod.POST)
+	public String addComment(@ModelAttribute("commento") String commento, Model model, @PathVariable("projectId") Long projectId,
+			@PathVariable("taskId") Long taskId) {
+		User loggedUser = this.sessionData.getLoggedUser();
+		Project project = this.projectService.getProject(projectId);
+		Task task = taskService.getTask(taskId);
+		Commento comment = new Commento();
+		comment.setCommento(commento);
+		comment.setUser(sessionData.getLoggedUser());
+		task.addCommento(comment);
+		System.out.println();
+		commentoService.saveCommento(comment);
+		taskService.saveTask(task);
+		model.addAttribute("project", project);
+		model.addAttribute("task", task);
+		model.addAttribute("userForm", loggedUser);
+
+		return "task";
+
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -8,7 +8,7 @@
 <body>
      <font color="grey" size="5">your tag</font>
 	<h1 th:text="${tag.name}"></h1>
-	Color: <h2 th:text="${tag.colour}"></h2>
+	<h2 th:text="${tag.colour}"></h2>
 	<h3 th:text="${tag.description}" style="color: green"></h3>
 	<h3>Linked Tasks</h3>
 	<div th:if="${linkedTasks.size()>0}">

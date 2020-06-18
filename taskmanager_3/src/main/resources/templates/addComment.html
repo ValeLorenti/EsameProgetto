@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+	<link rel="stylesheet" type="text/css" href="../static/css/css.css"></link>
+<head>
+<title>TaskManager</title>
+</head>
+
+<body>
+
+	<h1>Share a Project</h1>
+
+	<form id="shareProjectForm"
+		th:action="@{'/projects/' + ${project.id} + '/task/' + ${task.id} + '/addComment'}" method="POST">
+
+		<table>
+			<tr>
+				<td><label for="commentInput">Commento</label>
+				<td><input id=commentInput type="text" placeholder="COMMENT"
+					th:name="commento" required /></td>
+			</tr>
+		</table>
+		<button type="submit">Add</button>
+	</form>
+	
+</body>
+</html>

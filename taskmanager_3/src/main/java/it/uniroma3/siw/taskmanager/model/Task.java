@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -68,9 +69,13 @@ public class Task {
     
     @ManyToMany(cascade = {CascadeType.REMOVE})
     private List<Tag> tags;
+    
+    @OneToMany
+	private List<Commento> commenti;
 
     public Task() {
     	this.tags = new ArrayList<>();
+    	this.commenti = new ArrayList<>();
     }
 
     public Task(String name,
@@ -167,6 +172,19 @@ public class Task {
 		this.tags = tags;
 	}
 
+	
+	public List<Commento> getCommenti() {
+		return commenti;
+	}
+
+	public void setCommento(List<Commento> commenti) {
+		this.commenti = commenti;
+	}
+
+	public void addCommento(Commento commento) {
+		this.commenti.add(commento);
+	}
+	
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
